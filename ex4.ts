@@ -50,6 +50,7 @@ export function* Fib2() {
   }
 }
 
+// My adds
 const equalTrees = (tree1: any, tree2: any, succ: any, fail: any): any => {
   if (!tree1.length && !tree2.length) {
     return succ([]);
