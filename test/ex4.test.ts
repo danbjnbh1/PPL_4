@@ -57,7 +57,7 @@ describe('Q1 Tests', () => {
     })
 });
 
-describe.only('Q2 Tests', () => {
+describe('Q2 Tests', () => {
 
     it("Q2 test 1", () => {
       expect(take(10, Fib1())).to.deep.equal([1,1,2,3,5,8,13,21,34,55]);
