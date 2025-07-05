@@ -42,20 +42,37 @@ book(the_lord_of_the_rings, t, f, s(s(s(s(s(s(zero))))))).
 
 % Signature: max_list(Lst, Max)/2
 % Purpose: true if Max is the maximum church number in Lst, false if Lst is emoty.
+% max_list(+List, -Max)
+% True if Max is the largest Church numeral in the list
+% Fails if the list is empty
+max_list([], _) :- fail.
+max_list([X], X).
+max_list([H|T], Max) :-
+    max_list(T, TempMax),
+    max_church(H, TempMax, Max).
 
+% max_church(+A, +B, -Max)
+% Max is the greater of Church numerals A and B
+max_church(A, B, A) :-
+    greater_than_church(A, B).
+max_church(A, B, B) :-
+    \+ greater_than_church(A, B).  % A is not greater, so B is max
 
-
-
-
+% greater_than_church(+A, +B)
+% True if Church numeral A is greater than B
+greater_than_church(s(_), zero).
+greater_than_church(s(A), s(B)) :-
+    greater_than_church(A, B).
 
 
 
 % Signature: author_of_genre(GenreName, AuthorName)/2
 % Purpose: true if an author by the name AuthorName has written a book belonging to the genre named GenreName.
 
-
-
-
+author_of_genre(GenreName, AuthorName):-
+    author(AuthorId, AuthorName),
+    book(_, AuthorId, GenreId, _),
+    genre(GenreId, GenreName).
 
 
 
